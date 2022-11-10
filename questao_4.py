@@ -1,8 +1,10 @@
 # 4 - Utilizando a biblioteca gráfica Tkinter, o aluno deve construir uma interface que simule uma tela de
 # login de usuário contendo o campo de login, senha e um botão de autenticação. (2,0 pontos).
 
+from ast import Raise
 from tkinter import *
 from tkinter import Tk, ttk
+from tkinter import messagebox
 
 # Cores -----------
 
@@ -33,9 +35,48 @@ frame_baixo.grid(row=1, column=0, pady=1, padx=0, sticky=NSEW)
 # Configurando o frame de cima
 label_nome = Label(frame_cima, text='Tela de Login',
                    anchor=NE, font=('Ivy 25'), bg=co1, fg=co4)
+label_nome.place(x=5,y=5)
 
 
-# link https://www.youtube.com/watch?v=-8kvUOj3V8I
+label_linha = Label(frame_cima, text='', width=275, anchor=NW, font=('Ivy 1'), bg=co2, fg=co4)
+label_linha.place(x=10,y=45)
+
+
+# Configurando o frame baixo
+label_nome = Label(frame_baixo, text='Login *',
+                   anchor=NW, font=('Ivy 10'), bg=co1, fg=co4)
+label_nome.place(x=10,y=20)
+e_nome = Entry(frame_baixo, width=25, justify='left', font=("",15), 
+                    highlightthickness=1,relief='solid')
+e_nome.place(x=14,y=50)
+
+
+label_pass = Label(frame_baixo, text='Password *',
+                   anchor=NW, font=('Ivy 10'), bg=co1, fg=co4)
+label_pass.place(x=10,y=95)
+e_pass = Entry(frame_baixo, width=25, justify='left', show='*', font=("",15), 
+                    highlightthickness=1,relief='solid')
+e_pass.place(x=14,y=130)
+
+
+confirmar = Button(frame_baixo, command=verificar_senha, text='Entrar *', width=39, height=2,
+                   font=('Ivy 8 bold'), bg=co2, fg=co1, relief=RAISED, overrelief=RIDGE)
+confirmar.place(x=15,y=180)
+
+# Credenciais
+credenciais = ['joao','1234']
+
+def verificar_senha():
+    nome = e_nome.get()
+    senha = e_pass.get()
+
+    if nome == 'admin' and senha == 'admin':
+        messagebox.showinfo('Login Realizado_Bem-Vindo')
+    elif credenciais[0] == nome and credenciais[1]==senha:
+        messagebox.showinfo('Login Realizado_Bem-Vindo')
+    else: 
+        messagebox.showwarning('Erro - Login não realizado')
+        
 
 # método que inicia a janela gráfica, ela fica aberta até seja dado o comando de fechar, botão X.
 janela.mainloop()
